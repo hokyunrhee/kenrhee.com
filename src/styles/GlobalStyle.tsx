@@ -201,8 +201,8 @@ function GlobalStyle() {
         }
 
         /**
-Correct the inability to style clickable types in iOS and Safari.
-*/
+        Correct the inability to style clickable types in iOS and Safari.
+        */
 
         button,
         [type='button'],

@@ -1,13 +1,12 @@
 import styled from '@emotion/styled';
 
-import themeStore from '@/stores/theme';
+import { useColorMode } from '@/context/ColorMode';
 
 const Home = () => {
-  const { toggleTheme } = themeStore;
-
+  const { onToggle } = useColorMode();
   return (
     <>
-      <button onClick={toggleTheme}>click</button>
+      <button onClick={onToggle}>click</button>
       <SomeText>7777</SomeText>
     </>
   );

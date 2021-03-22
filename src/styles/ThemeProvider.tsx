@@ -1,20 +1,18 @@
-import { observer } from 'mobx-react-lite';
-
 import { ThemeProvider as EmotionThemeProvider } from '@emotion/react';
+
+import { useColorMode } from '@/context/ColorMode';
 
 import GlobalStyle from './GlobalStyle';
 import { themeLight, themeDark } from './customTheme';
-
-import ThemeStore from '@/stores/theme';
 
 interface Props {
   children: React.ReactNode;
 }
 
-const ThemeProvider = observer(({ children }: Props) => {
-  const { currentTheme } = ThemeStore;
+const ThemeProvider = ({ children }: Props) => {
+  const { colorMode } = useColorMode();
 
-  const theme = currentTheme === 'light' ? themeLight : themeDark;
+  const theme = colorMode === 'light' ? themeLight : themeDark;
 
   return (
     <EmotionThemeProvider theme={theme}>
@@ -22,6 +20,6 @@ const ThemeProvider = observer(({ children }: Props) => {
       {children}
     </EmotionThemeProvider>
   );
-});
+};
 
 export default ThemeProvider;
