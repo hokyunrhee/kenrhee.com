@@ -1,43 +1,17 @@
 import React from 'react';
 
-import { Flex, Text } from '@chakra-ui/react';
-
-import { Home, Pencil, Me } from '@/components/atoms/Icon';
-
-import Tab from './Tab';
+import { Flex, IconButton, useColorMode } from '@chakra-ui/react';
+import { Sun, Moon } from '@/components/atoms/Icon';
 
 const Navigation = () => {
+  const { colorMode, toggleColorMode } = useColorMode();
   return (
-    <Flex
-      as="nav"
-      flexDirection="column"
-      width="70px"
-      height="100vh"
-      position="sticky"
-      top={0}
-      left={0}
-      bg="gray.700"
-    >
-      <Tab href="/" width="70px" height="70px">
-        <Home w={8} h={8} />
-        <Text fontSize="xs" fontWeight="bold">
-          Home
-        </Text>
-      </Tab>
-
-      <Tab href="/blog" width="70px" height="70px">
-        <Pencil w={8} h={8} />
-        <Text fontSize="xs" fontWeight="bold">
-          Blog
-        </Text>
-      </Tab>
-
-      <Tab href="/about" width="70px" height="70px">
-        <Me w={8} h={8} />
-        <Text fontSize="xs" fontWeight="bold">
-          About
-        </Text>
-      </Tab>
+    <Flex position="absolute" top={5} right={5}>
+      <IconButton
+        aria-label="toggle color mode"
+        icon={colorMode === 'light' ? <Sun /> : <Moon />}
+        onClick={toggleColorMode}
+      />
     </Flex>
   );
 };

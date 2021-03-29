@@ -15,6 +15,10 @@ function MyApp({ Component, pageProps }: AppProps) {
             flex-direction: column;
             min-height: 100vh;
           }
+          ul,
+          ol {
+            list-style: none;
+          }
         `}
       />
       <AppLayout>

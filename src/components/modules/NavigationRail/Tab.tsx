@@ -12,12 +12,14 @@ interface Props {
   height: number | string;
 }
 
-const Navigation: React.FC<Props> = ({ href, children, width, height }) => {
+const Tab: React.FC<Props> = ({ href, children, width, height }) => {
   const router = useRouter();
 
   return (
     <NextLink href={href} passHref>
-      <Link color={href === router.pathname ? 'gray.50' : 'gray.500'}>
+      <Link
+        color={href === router.pathname ? 'blackAlpha.800' : 'blackAlpha.500'}
+      >
         <Center width={width} height={height}>
           <Flex flexDirection="column" alignItems="center">
             {children}
@@ -28,4 +30,4 @@ const Navigation: React.FC<Props> = ({ href, children, width, height }) => {
   );
 };
 
-export default Navigation;
+export default Tab;
