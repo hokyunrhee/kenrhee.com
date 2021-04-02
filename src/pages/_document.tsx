@@ -4,12 +4,7 @@ class MyDocument extends Document {
   render() {
     return (
       <Html>
-        <Head>
-          <link
-            rel="stylesheet"
-            href="https://unpkg.com/@tailwindcss/typography@0.2.x/dist/typography.min.css"
-          />
-        </Head>
+        <Head />
         <body>
           <Main />
           <NextScript />

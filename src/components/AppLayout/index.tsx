@@ -1,20 +1,15 @@
 import React from 'react';
 
-import { Flex, Box } from '@chakra-ui/react';
-
-import NavigationRail from '@/components/modules/NavigationRail';
-// import Navigation from '@/components/modules/Navigation';
+import Navigation from '@/components/modules/Navigation';
+import Container from '@/components/atoms/Container';
 
 const AppLayout: React.FC = ({ children }) => {
   return (
-    <Flex flexGrow={1} bg="gray.50">
-      <NavigationRail />
-      {/* <Navigation /> */}
+    <div className="flex-grow relative">
+      <Navigation />
 
-      <Box flexGrow={1} p={5}>
-        {children}
-      </Box>
-    </Flex>
+      <Container className="flex-grow">{children}</Container>
+    </div>
   );
 };
 

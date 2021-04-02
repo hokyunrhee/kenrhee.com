@@ -5,20 +5,20 @@ import client from '@/utils/contentful';
 import marked from 'marked';
 import sanitizeHtml from 'sanitize-html';
 
-import { Box } from '@chakra-ui/react';
-
 const BlogPost = ({ post }) => {
-  const { title, subtitle, banner, content } = post.fields;
+  const {
+    fields: { title, subtitle, content },
+  } = post;
 
   const contentHTML = marked(content);
   const sanitizedHTML = sanitizeHtml(contentHTML);
 
   return (
-    <Box as="article" className="prose sm:prose" mx="auto">
+    <article className="prose mx-auto">
       <h1>{title}</h1>
-      <h2>{subtitle}</h2>
+      <p className="italic font-semibold">{subtitle}</p>
       <div dangerouslySetInnerHTML={{ __html: sanitizedHTML }} />
-    </Box>
+    </article>
   );
 };
 
@@ -31,7 +31,7 @@ export async function getStaticPaths() {
 
   return {
     paths: items.map((item) => ({ params: { slug: item.sys.id } })),
-    fallback: true,
+    fallback: false,
   };
 }
 
@@ -40,6 +40,5 @@ export async function getStaticProps({ params }) {
     entry_id: params.slug,
   });
 
-  // Pass post data to the page via props
   return { props: { post } };
 }

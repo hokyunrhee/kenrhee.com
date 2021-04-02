@@ -1,75 +1,33 @@
 import React from 'react';
 
-import Image from 'next/image';
-import { Box, Badge } from '@chakra-ui/react';
-// AspectRatio, Image,
 export interface Props {
-  maxWidth?: string | number;
   title: string;
   subtitle: string;
-  url: string;
   tags?: string[];
 }
 
-const Card: React.FC<Props> = ({
-  url,
-  title,
-  subtitle,
-  tags = [],
-  ...props
-}) => {
+const Card: React.FC<Props> = ({ title, subtitle, tags = [] }) => {
   return (
-    <Box
-      boxShadow="md"
-      borderRadius="md"
-      overflow="hidden"
-      bg="white"
-      {...props}
-    >
-      {/* <AspectRatio ratio={16 / 9}>
-        <Image src={url} objectFit="cover" />
-      </AspectRatio> */}
-      <Box display="flex">
-        <Image
-          src={`https:${url}`}
-          width={1280}
-          height={720}
-          objectFit="cover"
-        />
-      </Box>
+    <div>
+      <div className="flex flex-col py-8">
+        <div>
+          <h2 className="text-xl font-semibold text-gray-900">{title}</h2>
 
-      <Box p={3} flexDirection="column">
-        <Box>
-          <Box
-            as="h2"
-            fontSize="xl"
-            fontWeight="bold"
-            lineHeight="tight"
-            mt={1}
-          >
-            {title}
-          </Box>
+          <h3 className="text-gray-600 my-4">{subtitle}</h3>
+        </div>
 
-          <Box as="h3" lineHeight="tight" my={3}>
-            {subtitle}
-          </Box>
-        </Box>
-
-        <Box d="flex" alignItems="baseline">
+        <div className="flex items-center">
           {tags.map((tag, index) => (
-            <Badge
+            <div
               key={index}
-              fontWeight="medium"
-              borderRadius="full"
-              px={2}
-              colorScheme="teal"
+              className="text-green-700 text-sm rounded-full px-2 bg-green-200"
             >
               {tag}
-            </Badge>
+            </div>
           ))}
-        </Box>
-      </Box>
-    </Box>
+        </div>
+      </div>
+    </div>
   );
 };
 

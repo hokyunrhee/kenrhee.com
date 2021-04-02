@@ -1,18 +1,21 @@
 import React from 'react';
 
-import { Flex, IconButton, useColorMode } from '@chakra-ui/react';
-import { Sun, Moon } from '@/components/atoms/Icon';
+import Container from '@/components/atoms/Container';
+import Link from './Link';
 
 const Navigation = () => {
-  const { colorMode, toggleColorMode } = useColorMode();
   return (
-    <Flex position="absolute" top={5} right={5}>
-      <IconButton
-        aria-label="toggle color mode"
-        icon={colorMode === 'light' ? <Sun /> : <Moon />}
-        onClick={toggleColorMode}
-      />
-    </Flex>
+    <nav className="py-8 md:py-12 bg-white">
+      <Container className="flex justify-between items-center">
+        <div />
+        <div>
+          <Link href="/blog">Blog</Link>
+          {/* <Link href="/note">Note</Link> */}
+          {/* <Link href="/about">About</Link> */}
+          <Link href="/">Home</Link>
+        </div>
+      </Container>
+    </nav>
   );
 };
 
