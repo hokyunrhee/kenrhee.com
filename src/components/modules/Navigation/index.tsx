@@ -10,7 +10,7 @@ const Navigation = () => {
         <div />
         <div>
           <Link href="/blog">Blog</Link>
-          {/* <Link href="/note">Note</Link> */}
+          <Link href="/til">TIL</Link>
           {/* <Link href="/about">About</Link> */}
           <Link href="/">Home</Link>
         </div>

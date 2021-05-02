@@ -26,7 +26,7 @@ export default BlogPost;
 
 export async function getStaticPaths() {
   const { items } = await client.getEntries({
-    content_type: 'blogPost',
+    content_type: 'til',
   });
 
   return {

@@ -6,11 +6,11 @@ import Link from 'next/link';
 
 import Card from '@/components/modules/Card';
 
-const Blog = ({ posts }: any) => {
+const TIL = ({ posts }: any) => {
   return (
     <section>
       {posts.map((post: any) => (
-        <Link key={post.sys.id} href={`/blog/${post.sys.id}`}>
+        <Link key={post.sys.id} href={`/til/${post.sys.id}`}>
           <a>
             <Card
               title={post.fields.title}
@@ -24,11 +24,11 @@ const Blog = ({ posts }: any) => {
   );
 };
 
-export default Blog;
+export default TIL;
 
 export async function getStaticProps() {
   const { items } = await client.getEntries({
-    content_type: 'blogPost',
+    content_type: 'til',
   });
 
   return { props: { posts: items }, revalidate: 60 };
