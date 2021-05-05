@@ -1,9 +1,11 @@
-import React from 'react';
+import Head from 'next/head';
 
 import client from '@/utils/contentful';
 
 import marked from 'marked';
 import sanitizeHtml from 'sanitize-html';
+
+import UtterancesComments from '@/components/modules/UtterancesComments';
 
 const BlogPost = ({ post }: any) => {
   const {
@@ -14,11 +16,17 @@ const BlogPost = ({ post }: any) => {
   const sanitizedHTML = sanitizeHtml(contentHTML);
 
   return (
-    <article className="prose mx-auto">
-      <h1>{title}</h1>
-      <p className="italic font-semibold">{subtitle}</p>
-      <div dangerouslySetInnerHTML={{ __html: sanitizedHTML }} />
-    </article>
+    <>
+      <Head>
+        <title>{title}</title>
+      </Head>
+      <article className="prose mx-auto">
+        <h1>{title}</h1>
+        <p className="italic font-semibold">{subtitle}</p>
+        <div dangerouslySetInnerHTML={{ __html: sanitizedHTML }} />
+        <UtterancesComments />
+      </article>
+    </>
   );
 };
 
