@@ -1,16 +1,13 @@
 import React from 'react';
 
-import Navigation from '@/components/modules/Navigation';
-import Container from '@/components/atoms/Container';
+import { Container, ContainerProps } from '@chakra-ui/react';
 
-const AppLayout: React.FC = ({ children }) => {
-  return (
-    <div className="flex-grow relative">
-      <Navigation />
+interface Props extends ContainerProps {
+  children: React.ReactElement;
+}
 
-      <Container className="flex-grow">{children}</Container>
-    </div>
-  );
+const AppLayout = (props: Props) => {
+  return <Container maxW="container.xl" px={4} {...props} />;
 };
 
 export default AppLayout;
