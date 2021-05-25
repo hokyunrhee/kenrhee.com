@@ -5,7 +5,6 @@ const UtterancesComments = () => {
 
   useEffect(() => {
     if (!nodeRef.current) return;
-    console.log({ nodeRef });
     const scriptEl = document.createElement('script');
     scriptEl.setAttribute('src', 'https://utteranc.es/client.js');
     scriptEl.setAttribute('repo', 'hokyunrhee/kenrhee.com-comments');
