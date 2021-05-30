@@ -12,15 +12,15 @@ import { useInfiniteQuery } from 'react-query';
 
 import useInView from 'hooks/useInView';
 
-const CONTENT_TYPE = 'blogPost';
+const CONTENT_TYPE = 'til';
 const LIMIT = 5;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const Blog = ({ initialData }: any) => {
+const Til = ({ initialData }: any) => {
   const { ref, inView } = useInView();
 
   const { data, fetchNextPage, hasNextPage, isLoading, isError, isFetching, isFetchingNextPage } = useInfiniteQuery(
-    ['posts'],
+    ['til'],
     ({ pageParam = 0 }) => api.queries.entries({ content_type: CONTENT_TYPE, limit: LIMIT, skip: pageParam * LIMIT }),
     {
       initialData,
@@ -47,14 +47,14 @@ const Blog = ({ initialData }: any) => {
 
   return (
     <VStack spacing={16} alignItems="flex-start">
-      <AllContents heading="All Posts" route="/blog" contents={contents} />
+      <AllContents heading="Today I Learned" route="/til" contents={contents} />
       {isFetching && <Spinner mx="auto" />}
       <div ref={ref} />
     </VStack>
   );
 };
 
-export default Blog;
+export default Til;
 
 export async function getStaticProps() {
   const { total, skip, limit, items } = await client.getEntries({ content_type: CONTENT_TYPE, order: 'sys.createdAt', limit: LIMIT });

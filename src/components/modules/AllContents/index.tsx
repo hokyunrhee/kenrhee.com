@@ -5,19 +5,25 @@ import { Box, Heading, SimpleGrid } from '@chakra-ui/react';
 
 import PostCard from '@/components/atoms/PostCard';
 
-const RecentPosts = ({ recentPosts }: any) => {
+interface Props {
+  heading: string;
+  route: string;
+  contents: any[];
+}
+
+const AllContents = ({ heading, route, contents }: Props) => {
   return (
     <Box>
       <Heading as="h3" size="xl" fontWeight="bold" mb={8}>
-        Recent Posts
+        {heading}
       </Heading>
       <SimpleGrid columns={1} spacing={8}>
-        {recentPosts.map((item: any) => (
-          <PostCard key={item.sys.id} title={item.fields.title} subTitle={item.fields.subtitle} href={`/blog/${item.fields.slug}`} />
+        {contents.map((item: any) => (
+          <PostCard key={item.sys.id} title={item.fields.title} subTitle={item.fields.subtitle} href={`${route}/${item.fields.slug}`} />
         ))}
       </SimpleGrid>
     </Box>
   );
 };
 
-export default RecentPosts;
+export default AllContents;

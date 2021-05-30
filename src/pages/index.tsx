@@ -7,6 +7,7 @@ import { VStack } from '@chakra-ui/react';
 import Greeting from '@/components/modules/Greeting';
 import RecentPosts from '@/components/modules/RecentPosts';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const Home = ({ recentPosts }: any) => {
   return (
     <VStack spacing={16} alignItems="flex-start">
@@ -19,7 +20,7 @@ const Home = ({ recentPosts }: any) => {
 export default Home;
 
 export async function getStaticProps() {
-  const { items } = await client.getEntries({ content_type: 'blogPost', limit: 5 });
+  const { items } = await client.getEntries({ content_type: 'blogPost', order: 'sys.createdAt', limit: 5 });
 
   return {
     props: {
