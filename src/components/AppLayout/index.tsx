@@ -1,15 +1,23 @@
 import React from 'react';
 
-import Navigation from '@/components/modules/Navigation';
-import Container from '@/components/atoms/Container';
+import { Container, ContainerProps } from '@chakra-ui/react';
 
-const AppLayout: React.FC = ({ children }) => {
+import Header from '@/components/modules/Header';
+import Footer from '@/components/modules/Footer';
+
+interface Props extends ContainerProps {
+  children: React.ReactElement;
+}
+
+const AppLayout = ({ children }: Props) => {
   return (
-    <div className="flex-grow relative">
-      <Navigation />
-
-      <Container className="flex-grow">{children}</Container>
-    </div>
+    <>
+      <Header />
+      <Container as="main" flexGrow={1} maxW="container.sm" px={4} py={8}>
+        {children}
+      </Container>
+      <Footer />
+    </>
   );
 };
 

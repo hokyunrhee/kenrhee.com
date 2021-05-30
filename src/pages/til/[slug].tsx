@@ -1,45 +1,57 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React from 'react';
+
 import Head from 'next/head';
 
-import client from '@/utils/contentful';
+import { client } from '@/utils/contentful';
 
-import marked from 'marked';
-import sanitizeHtml from 'sanitize-html';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { options } from '@/utils/rich-text-react-renderer-options';
 
 import UtterancesComments from '@/components/modules/UtterancesComments';
 
-const BlogPost = ({ post }: any) => {
-  const {
-    fields: { title, subtitle, content },
-  } = post;
+import { Box, Heading } from '@chakra-ui/react';
 
-  const contentHTML = marked(content);
-  const sanitizedHTML = sanitizeHtml(contentHTML);
+const Post = ({ post }: any) => {
+  const {
+    fields: {
+      content: { content },
+      title,
+      subtitle,
+    },
+  } = post;
 
   return (
     <>
       <Head>
         <title>{title}</title>
       </Head>
-      <article className="prose mx-auto">
-        <h1>{title}</h1>
-        <p className="italic font-semibold">{subtitle}</p>
-        <div dangerouslySetInnerHTML={{ __html: sanitizedHTML }} />
+      <Box className="post">
+        <Heading as="h1" size="xl" lineHeight={1.5} mb={6}>
+          {title}
+        </Heading>
+        <Heading as="h2" size="sm" fontWeight="normal" mb={6}>
+          {subtitle}
+        </Heading>
+        {content.map((item: any, index: number) => (
+          <React.Fragment key={index}>{documentToReactComponents(item, options)}</React.Fragment>
+        ))}
         <UtterancesComments />
-      </article>
+      </Box>
     </>
   );
 };
 
-export default BlogPost;
+export default Post;
 
 export async function getStaticPaths() {
-  const { items } = await client.getEntries({
-    content_type: 'til',
-  });
+  const { items } = await client.getEntries({ content_type: 'til', limit: 100 });
+
+  const paths = items.map((item: any) => ({ params: { slug: item.fields.slug } }));
 
   return {
-    paths: items.map((item) => ({ params: { slug: item.sys.id } })),
-    fallback: false,
+    paths,
+    fallback: 'blocking',
   };
 }
 
@@ -48,9 +60,22 @@ type Params = {
     slug: string;
   };
 };
-
 export async function getStaticProps({ params }: Params) {
-  const post = await client.getEntry(params.slug);
+  const { items } = await client.getEntries({ content_type: 'til', 'fields.slug': params.slug });
 
-  return { props: { post }, revalidate: 60 };
+  if (!items.length) {
+    return {
+      redirect: {
+        destination: '/til',
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {
+      post: items[0],
+    },
+    revalidate: 600,
+  };
 }
