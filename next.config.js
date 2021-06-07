@@ -1,5 +1,10 @@
 module.exports = {
-  images: {
-    domains: ['images.ctfassets.net'],
+  async rewrites() {
+    return [
+      {
+        source: '/sitemap.xml',
+        destination: '/api/sitemap',
+      },
+    ];
   },
 };

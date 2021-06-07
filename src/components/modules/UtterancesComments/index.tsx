@@ -1,5 +1,8 @@
 import { useRef, useEffect } from 'react';
 
+const REPO = 'hokyunrhee/kenrhee.com-comments';
+const IssueTerm: 'pathname' | 'url' | 'title' | 'og:title' = 'title';
+
 const UtterancesComments = () => {
   const nodeRef = useRef<HTMLDivElement>(null);
 
@@ -7,8 +10,8 @@ const UtterancesComments = () => {
     if (!nodeRef.current) return;
     const scriptEl = document.createElement('script');
     scriptEl.setAttribute('src', 'https://utteranc.es/client.js');
-    scriptEl.setAttribute('repo', 'hokyunrhee/kenrhee.com-comments');
-    scriptEl.setAttribute('issue-term', 'title');
+    scriptEl.setAttribute('repo', REPO);
+    scriptEl.setAttribute('issue-term', IssueTerm);
     scriptEl.setAttribute('theme', 'github-light');
     scriptEl.setAttribute('crossorigin', 'anonymous');
     scriptEl.setAttribute('async', '');
