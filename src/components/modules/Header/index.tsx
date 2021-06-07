@@ -19,6 +19,10 @@ const Navs = [
     textContent: 'TIL',
     href: '/til',
   },
+  {
+    textContent: 'Snippets',
+    href: '/snippets',
+  },
 ];
 
 const Header = () => {
