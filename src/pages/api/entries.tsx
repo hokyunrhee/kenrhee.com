@@ -6,7 +6,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const { total, skip, limit, items } = await client.getEntries({
       content_type: req.query.content_type,
-      order: 'sys.createdAt',
+      order: '-sys.createdAt',
       limit: req.query.limit ?? 100,
       skip: req.query.skip ?? 0,
     });

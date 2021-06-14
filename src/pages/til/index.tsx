@@ -57,7 +57,7 @@ const Til = ({ initialData }: any) => {
 export default Til;
 
 export async function getStaticProps() {
-  const { total, skip, limit, items } = await client.getEntries({ content_type: CONTENT_TYPE, order: 'sys.createdAt', limit: LIMIT });
+  const { total, skip, limit, items } = await client.getEntries({ content_type: CONTENT_TYPE, order: '-sys.createdAt', limit: LIMIT });
   const page = skip / limit;
 
   const initialData = {

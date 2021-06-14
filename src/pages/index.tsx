@@ -20,7 +20,7 @@ const Home = ({ recentPosts }: any) => {
 export default Home;
 
 export async function getStaticProps() {
-  const { items } = await client.getEntries({ content_type: 'blogPost', order: 'sys.createdAt', limit: 5 });
+  const { items } = await client.getEntries({ content_type: 'blogPost', order: '-sys.createdAt', limit: 5 });
 
   return {
     props: {
