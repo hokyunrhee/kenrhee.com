@@ -3,7 +3,7 @@
 import React from 'react';
 
 import NextLink from 'next/link';
-
+import { Image } from '@chakra-ui/react';
 import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
@@ -81,6 +81,10 @@ export const options = {
     [INLINES.HYPERLINK]: (node: any, children: React.ReactNode) => {
       const { uri } = node.data;
       return HyperlinkToLinkComponent(uri, children);
+    },
+    [BLOCKS.EMBEDDED_ASSET]: (node: any) => {
+      const src = `https:${node.data.target.fields.file.url}`;
+      return <Image src={src} my="16px" />;
     },
   },
   renderMark: {
